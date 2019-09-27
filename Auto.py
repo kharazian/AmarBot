@@ -21,10 +21,10 @@ password.send_keys('')
 
 webdriver.find_element_by_xpath('//*[@id="ctl01"]/div[6]/div').click()
 
-companies = ['SH']
+companies = ['SazAramestan']
 
 # companies = ['SazMotori','SazMotori']
-forms = ['Frm2','Frm3']
+forms = ['Frm3','Frm3']
 i = 0
 for company in companies:
     wb = load_workbook(os.path.join(dirname, company+'\\Frm.xlsx'))
@@ -281,10 +281,10 @@ for company in companies:
                 else:
                     values = [(u"" if cell.value is None else str(cell.value).strip()) for cell in rownum]
 
-                    if(values[36] == 'added'):
+                    if(values[35] == 'added'):
                         continue
-                    elif(values[39] != ''):
-                        webdriver.get('http://amarnameh.imo.org.ir/Input/EditEx.aspx?Id=8024&cid='+values[54])
+                    elif(values[38] != ''):
+                        webdriver.get('http://amarnameh.imo.org.ir/Input/EditEx.aspx?Id=8024&cid='+values[38])
                     else:
                         webdriver.get('http://amarnameh.imo.org.ir/Input/EditEx.aspx?Id=8024')
 
