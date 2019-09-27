@@ -21,7 +21,7 @@ password.send_keys('')
 
 webdriver.find_element_by_xpath('//*[@id="ctl01"]/div[6]/div').click()
 
-companies = ['SazFarhangi']
+companies = ['SH']
 
 # companies = ['SazMotori','SazMotori']
 forms = ['Frm2','Frm3']
@@ -43,6 +43,7 @@ for company in companies:
         ws['BC1'] = 'serial'
         # http://amarnameh.imo.org.ir/Input/Update.aspx?Id=8023&cid=281
         index = 0
+        total = ws.max_row
         for rownum in ws.iter_rows():
             index = index + 1
             try:
@@ -53,7 +54,7 @@ for company in companies:
 
                     if(values[51] == 'added'):
                         continue
-                    elif(values[51] == 'error' and  values[54] != ''):
+                    elif(values[54] != ''):
                         webdriver.get('http://amarnameh.imo.org.ir/Input/Update.aspx?Id=8023&cid='+values[54])
                     else:
                         webdriver.get('http://amarnameh.imo.org.ir/Input/EditEx.aspx?Id=8023')
@@ -228,12 +229,12 @@ for company in companies:
                     added += 1
                     if(attachmentError == ''):
                         ws['AZ'+str(index)] = "added"
-                        print('Adeed {} - {} {} '.format(values[13], values[11], values[12]))
+                        print('{0} - {1} {2:3.0f}% Frm2 Adeed {3} '.format(index,total,index/total*100,values[13]))
                     else:
                         ws['AZ'+str(index)] = "added"
                         ws['BA'+str(index)] = 'atachment'
                         ws['BB'+str(index)] = attachmentError
-                        print('Adeed AttachmentError {} - {} {} '.format(values[13], values[11], values[12]))
+                        print('{0} - {1} {2:3.0f}% Frm2 Adeed AttachmentError {3} - {4}'.format(index,total,index/total*100,values[13], attachmentError))
                     try:
                         webdriver.switch_to.alert.accept()
                     except:
@@ -244,11 +245,11 @@ for company in companies:
                 if i > 0 :
                     ws['BA'+str(index)] = col[i]
                     ws['BB'+str(index)] = values[i]
-                    print('Error {} - {} {} '.format(values[13], col[i], values[i]))                    
+                    print('{0} - {1} {2:3.0f}% Frm2 Error {3} - {4} {5} {6} '.format(index,total,index/total*100,values[13], i,col[i], values[i]))                    
                 else : 
                     ws['BA'+str(index)] = 'atachment'
                     ws['BB'+str(index)] = i
-                    print('Error AttachmentError {} '.format(values[13]))
+                    print('{0} - {1} {2:3.0f}% Frm2 Error Frm2 Error AttachmentError {3} {4}'.format(index,total,index/total*100,values[13], attachmentError))
                 
                 withError += 1
                 continue
@@ -271,6 +272,7 @@ for company in companies:
         ws['AM1'] = 'serial'
         # http://amarnameh.imo.org.ir/Input/Update.aspx?Id=8023&cid=281
         index = 0
+        total = ws.max_row
         for rownum in ws.iter_rows():
             index = index + 1
             try:
@@ -281,7 +283,7 @@ for company in companies:
 
                     if(values[36] == 'added'):
                         continue
-                    elif(values[36] == 'error' and  values[39] != ''):
+                    elif(values[39] != ''):
                         webdriver.get('http://amarnameh.imo.org.ir/Input/EditEx.aspx?Id=8024&cid='+values[54])
                     else:
                         webdriver.get('http://amarnameh.imo.org.ir/Input/EditEx.aspx?Id=8024')
@@ -404,12 +406,12 @@ for company in companies:
                     added += 1
                     if(attachmentError == ''):
                         ws['AJ'+str(index)] = "added"
-                        print('Adeed {} - {} {} '.format(values[13], values[11], values[12]))
+                        print('{0} - {1} {2:3.0f}% Frm 3 Adeed {3} '.format(index,total,index/total*100,values[13]))
                     else:
                         ws['AJ'+str(index)] = "added"
                         ws['AK'+str(index)] = 'atachment'
                         ws['AL'+str(index)] = attachmentError
-                        print('Adeed AttachmentError {} - {} {} '.format(values[13], values[11], values[12]))
+                        print('{0} - {1} {2:3.0f}% Frm3 Adeed AttachmentError {3} - {4}'.format(index,total,index/total*100,values[13], attachmentError))
                     try:
                         webdriver.switch_to.alert.accept()
                     except:
@@ -420,11 +422,11 @@ for company in companies:
                 if i > 0 :
                     ws['AK'+str(index)] = col[i]
                     ws['AL'+str(index)] = values[i]
-                    print('Error {} - {} {} '.format(values[13], col[i], values[i]))                    
+                    print('{0} - {1} {2:3.0f}% Error {3} - {4} {5} {6}'.format(index,total,index/total*100,values[13], i,col[i], values[i]))                    
                 else : 
                     ws['AK'+str(index)] = 'atachment'
                     ws['AL'+str(index)] = i
-                    print('Error AttachmentError {} '.format(values[13]))
+                    print('{0} - {1} {2:3.0f}% Error AttachmentError {3} {4}'.format(index,total,index/total*100,values[13],attachmentError))
                 
                 withError += 1
                 continue
