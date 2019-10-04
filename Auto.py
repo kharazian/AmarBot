@@ -295,7 +295,7 @@ for company in companies:
                     if(values[35] == 'added'):
                         continue
                     elif(values[38] != ''):
-                        webdriver.get('http://amarnameh.imo.org.ir/Input/EditEx.aspx?Id=8024&cid='+values[38])
+                        webdriver.get('http://amarnameh.imo.org.ir/Input/Update.aspx?Id=8024&cid='+values[38])
                     else:
                         webdriver.get('http://amarnameh.imo.org.ir/Input/EditEx.aspx?Id=8024')
 
