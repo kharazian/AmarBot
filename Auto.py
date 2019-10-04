@@ -203,8 +203,10 @@ for company in companies:
                     i=-1
                     attachmentFile = os.path.join(dirname,company+'\\'+values[13]+'t.pdf')
                     if(not(os.path.exists(attachmentFile))):
-                        attachmentFile = temp
-                        attachmentError = attachmentError + ' t'
+                        attachmentFile = os.path.join(dirname,company+'\\'+values[13]+' t.pdf')
+                        if(not(os.path.exists(attachmentFile))):
+                            attachmentFile = temp
+                            attachmentError = attachmentError + ' t'
                     webdriver.find_element_by_name('ctl00$ContentPlaceHolder1$FACT_FIELD_44834').clear()
                     webdriver.find_element_by_name('ctl00$ContentPlaceHolder1$FACT_FIELD_44834').send_keys(attachmentFile)# مدرک تحصیلی
 
@@ -394,8 +396,10 @@ for company in companies:
                     i=-1
                     attachmentFile = os.path.join(dirname,company+'\\'+values[9]+'t.pdf')
                     if(not(os.path.exists(attachmentFile))):
-                        attachmentFile = temp
-                        attachmentError = attachmentError + ' t'
+                        attachmentFile = os.path.join(dirname,company+'\\'+values[9]+' t.pdf')
+                        if(not(os.path.exists(attachmentFile))):
+                            attachmentFile = temp
+                            attachmentError = attachmentError + ' t'
                     webdriver.find_element_by_name('ctl00$ContentPlaceHolder1$FACT_FIELD_44868').clear()
                     webdriver.find_element_by_name('ctl00$ContentPlaceHolder1$FACT_FIELD_44868').send_keys(attachmentFile)# مدرک تحصیلی
 
