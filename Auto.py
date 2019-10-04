@@ -14,17 +14,18 @@ webdriver = webdriver.Chrome(executable_path=chromedriver_path)
 
 webdriver.get('http://amarnameh.imo.org.ir')
 
+userData = open("userData.udata", "r")
+
 username = webdriver.find_element_by_name('txtUsername')
-username.send_keys('')
+username.send_keys(userData.readline().rstrip())
 password = webdriver.find_element_by_name('txtPassword')
-password.send_keys('')
+password.send_keys(userData.readline().rstrip())
 
 webdriver.find_element_by_xpath('//*[@id="ctl01"]/div[6]/div').click()
-
-companies = ['SazZibaSazi']
+companies = userData.readline().rstrip().split(',')
 
 # companies = ['SazMotori','SazMotori']
-forms = ['Frm2','Frm3']
+forms =  userData.readline().rstrip().split(',')
 i = 0
 attachmentError = ''
 for company in companies:
