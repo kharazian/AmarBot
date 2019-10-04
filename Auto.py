@@ -23,13 +23,15 @@ password.send_keys(userData.readline().rstrip())
 
 webdriver.find_element_by_xpath('//*[@id="ctl01"]/div[6]/div').click()
 companies = userData.readline().rstrip().split(',')
-
+print(companies)
 # companies = ['SazMotori','SazMotori']
 forms =  userData.readline().rstrip().split(',')
+excelfile =  userData.readline().rstrip()
+print(forms)
 i = 0
 attachmentError = ''
 for company in companies:
-    wb = load_workbook(os.path.join(dirname, company+'\\Frm.xlsx'))
+    wb = load_workbook(os.path.join(dirname, company+excelfile))
 
     if('Frm2' in forms):
         ws = wb['Frm2']
@@ -230,35 +232,34 @@ for company in companies:
                     webdriver.find_element_by_name('ctl00$ContentPlaceHolder1$FACT_FIELD_44837').send_keys(attachmentFile)# مجوز به کارگیری
 
                     webdriver.find_element_by_xpath('//*[@id="ctl00_ContentPlaceHolder1_mnuSave"]').click()# finish
-                    added += 1
+                    
                     if(attachmentError == ''):
+                        added += 1
                         ws['AZ'+str(index)] = "added"
-                        print('{0} - {1} {2:3.0f}% Frm2 Adeed {3} '.format(index,total,index/total*100,values[13]))
+                        ws['BA'+str(index)] = ''
+                        ws['BB'+str(index)] = ''
+                        print('{0} Frm2 : {1} - {2} {3:3.0f}% Adeed {4} '.format(company,index,total,index/total*100,values[13]))
                     else:
-                        ws['AZ'+str(index)] = "added"
-                        ws['BA'+str(index)] = 'atachment'
+                        withError += 1
+                        ws['AZ'+str(index)] = "error"
+                        ws['BA'+str(index)] = 'attachment'
                         ws['BB'+str(index)] = attachmentError
-                        print('{0} - {1} {2:3.0f}% Frm2 Adeed AttachmentError {3} - {4}'.format(index,total,index/total*100,values[13], attachmentError))
+                        print('{0} Frm2 : {1} - {2} {3:3.0f}% Adeed AttachmentError {4} - {5}'.format(company,index,total,index/total*100,values[13]),attachmentError)
                     try:
                         webdriver.switch_to.alert.accept()
                     except:
-                        ws['AZ'+str(index)] = "added"
+                        print('alert error')
             
             except:
                 ws['AZ'+str(index)] = "error"
-                if i > 0 :
-                    ws['BA'+str(index)] = col[i]
-                    ws['BB'+str(index)] = values[i]
-                    print('{0} - {1} {2:3.0f}% Frm2 Error {3} - {4} {5} {6} '.format(index,total,index/total*100,values[13], i,col[i], values[i]))                    
-                else : 
-                    ws['BA'+str(index)] = 'atachment'
-                    ws['BB'+str(index)] = i
-                    print('{0} - {1} {2:3.0f}% Frm2 Error Frm2 Error AttachmentError {3} {4}'.format(index,total,index/total*100,values[13], attachmentError))
-                
                 withError += 1
+                ws['BA'+str(index)] = col[i]
+                ws['BB'+str(index)] = values[i]
+                print('{0} Frm2 : {1} - {2} {3:3.0f}% Error {4} - {5} {6} {7} '.format(company,index,total,index/total*100,values[13], i,col[i], values[i]))                    
+                
                 continue
 
-        wb.save(os.path.join(dirname, company+'\\Frm.xlsx'))
+        wb.save(os.path.join(dirname, company+excelfile))
 
         print('Frm2 {} Added {} Person.'.format(company,added))
         print('Frm2 {} With {} Error.'.format(company,withError))
@@ -408,36 +409,35 @@ for company in companies:
                     webdriver.find_element_by_name('ctl00$ContentPlaceHolder1$FACT_FIELD_44870').clear()
                     webdriver.find_element_by_name('ctl00$ContentPlaceHolder1$FACT_FIELD_44870').send_keys(attachmentFile)# قزازداد        
 
-                    webdriver.find_element_by_xpath('//*[@id="ctl00_ContentPlaceHolder1_mnuSave"]').click()# finish
-                    added += 1
+                    webdriver.find_element_by_xpath('//*[@id="ctl00_ContentPlaceHolder1_mnuSave"]').click()# finish                    
                     if(attachmentError == ''):
+                        added += 1
                         ws['AJ'+str(index)] = "added"
-                        print('{0} - {1} {2:3.0f}% Frm 3 Adeed {3} '.format(index,total,index/total*100,values[13]))
+                        ws['AK'+str(index)] = ''
+                        ws['AL'+str(index)] = ''
+                        print('{0} Frm3 : {1} - {2} {3:3.0f}% Adeed {4} '.format(company,index,total,index/total*100,values[13]))
+
                     else:
-                        ws['AJ'+str(index)] = "added"
-                        ws['AK'+str(index)] = 'atachment'
+                        withError += 1
+                        ws['AJ'+str(index)] = "error"
+                        ws['AK'+str(index)] = 'attachment'
                         ws['AL'+str(index)] = attachmentError
-                        print('{0} - {1} {2:3.0f}% Frm3 Adeed AttachmentError {3} - {4}'.format(index,total,index/total*100,values[13], attachmentError))
+                        print('{0} Frm3 : {1} - {2} {3:3.0f}% Adeed AttachmentError {4} - {5}'.format(company,index,total,index/total*100,values[13], attachmentError))
                     try:
                         webdriver.switch_to.alert.accept()
                     except:
-                        ws['AJ'+str(index)] = "added"
+                        print('alert error')
             
             except:
                 ws['AJ'+str(index)] = "error"
-                if i > 0 :
-                    ws['AK'+str(index)] = col[i]
-                    ws['AL'+str(index)] = values[i]
-                    print('{0} - {1} {2:3.0f}% Error {3} - {4} {5} {6}'.format(index,total,index/total*100,values[13], i,col[i], values[i]))                    
-                else : 
-                    ws['AK'+str(index)] = 'atachment'
-                    ws['AL'+str(index)] = i
-                    print('{0} - {1} {2:3.0f}% Error AttachmentError {3} {4}'.format(index,total,index/total*100,values[13],attachmentError))
-                
                 withError += 1
+                ws['AK'+str(index)] = col[i]
+                ws['AL'+str(index)] = values[i]
+                print('{0} Frm3 : {1} - {2} {3:3.0f}%  Error {4} - {5} {6} {7}'.format(company,index,total,index/total*100,values[13], i,col[i], values[i]))                    
+                                
                 continue
 
-        wb.save(os.path.join(dirname, company+'\\Frm.xlsx'))
+        wb.save(os.path.join(dirname, company+excelfile))
 
         print('Frm3 {} Added {} Person.'.format(company,added))
         print('Frm3 {} With {} Error.'.format(company,withError))
