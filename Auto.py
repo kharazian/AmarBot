@@ -244,19 +244,25 @@ for company in companies:
                         ws['AZ'+str(index)] = "error"
                         ws['BA'+str(index)] = 'attachment'
                         ws['BB'+str(index)] = attachmentError
-                        print('{0} Frm2 : {1} - {2} {3:3.0f}% Adeed AttachmentError {4} - {5}'.format(company,index,total,index/total*100,values[13]),attachmentError)
+                        print('{0} Frm2 : {1} - {2} {3:3.0f}% Adeed AttachmentError {4} - {5}'.format(company,index,total,index/total*100,values[13],attachmentError))
                     try:
                         webdriver.switch_to.alert.accept()
                     except:
                         print('alert error')
-            
+                    try:
+                         wb.save(os.path.join(dirname, company+excelfile))
+                    except:
+                        print('file open')
             except:
                 ws['AZ'+str(index)] = "error"
                 withError += 1
                 ws['BA'+str(index)] = col[i]
                 ws['BB'+str(index)] = values[i]
                 print('{0} Frm2 : {1} - {2} {3:3.0f}% Error {4} - {5} {6} {7} '.format(company,index,total,index/total*100,values[13], i,col[i], values[i]))                    
-                
+                try:
+                    wb.save(os.path.join(dirname, company+excelfile))
+                except:
+                    print('file open')
                 continue
 
         wb.save(os.path.join(dirname, company+excelfile))
@@ -415,29 +421,38 @@ for company in companies:
                         ws['AJ'+str(index)] = "added"
                         ws['AK'+str(index)] = ''
                         ws['AL'+str(index)] = ''
-                        print('{0} Frm3 : {1} - {2} {3:3.0f}% Adeed {4} '.format(company,index,total,index/total*100,values[13]))
+                        print('{0} Frm3 : {1} - {2} {3:3.0f}% Adeed {4} '.format(company,index,total,index/total*100,values[9]))
 
                     else:
                         withError += 1
                         ws['AJ'+str(index)] = "error"
                         ws['AK'+str(index)] = 'attachment'
                         ws['AL'+str(index)] = attachmentError
-                        print('{0} Frm3 : {1} - {2} {3:3.0f}% Adeed AttachmentError {4} - {5}'.format(company,index,total,index/total*100,values[13], attachmentError))
+                        print('{0} Frm3 : {1} - {2} {3:3.0f}% Adeed AttachmentError {4} - {5}'.format(company,index,total,index/total*100,values[9], attachmentError))
                     try:
                         webdriver.switch_to.alert.accept()
                     except:
                         print('alert error')
-            
+                    try:
+                         wb.save(os.path.join(dirname, company+excelfile))
+                    except:
+                        print('file open')
+                   
             except:
                 ws['AJ'+str(index)] = "error"
                 withError += 1
                 ws['AK'+str(index)] = col[i]
                 ws['AL'+str(index)] = values[i]
-                print('{0} Frm3 : {1} - {2} {3:3.0f}%  Error {4} - {5} {6} {7}'.format(company,index,total,index/total*100,values[13], i,col[i], values[i]))                    
-                                
+                print('{0} Frm3 : {1} - {2} {3:3.0f}%  Error {4} - {5} {6} {7}'.format(company,index,total,index/total*100,values[9], i,col[i], values[i]))                    
+                try:
+                    wb.save(os.path.join(dirname, company+excelfile))
+                except:
+                    print('file open')                
                 continue
 
         wb.save(os.path.join(dirname, company+excelfile))
 
         print('Frm3 {} Added {} Person.'.format(company,added))
         print('Frm3 {} With {} Error.'.format(company,withError))
+webdriver.stop_client()
+webdriver.close()
