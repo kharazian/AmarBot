@@ -21,11 +21,12 @@ password.send_keys('')
 
 webdriver.find_element_by_xpath('//*[@id="ctl01"]/div[6]/div').click()
 
-companies = ['SazAramestan']
+companies = ['SazZibaSazi']
 
 # companies = ['SazMotori','SazMotori']
-forms = ['Frm3','Frm3']
+forms = ['Frm2','Frm3']
 i = 0
+attachmentError = ''
 for company in companies:
     wb = load_workbook(os.path.join(dirname, company+'\\Frm.xlsx'))
 
@@ -206,8 +207,10 @@ for company in companies:
 
                     attachmentFile = os.path.join(dirname,company+'\\'+values[13]+'s.pdf')
                     if(not(os.path.exists(attachmentFile))):
-                        attachmentFile = temp
-                        attachmentError = attachmentError + ' s'
+                        attachmentFile = os.path.join(dirname,company+'\\'+values[13]+'.pdf')
+                        if(not(os.path.exists(attachmentFile))):
+                            attachmentFile = temp                        
+                            attachmentError = attachmentError + ' s'
                     webdriver.find_element_by_name('ctl00$ContentPlaceHolder1$FACT_FIELD_44835').clear()
                     webdriver.find_element_by_name('ctl00$ContentPlaceHolder1$FACT_FIELD_44835').send_keys(attachmentFile)# سابقه بیمه
 
@@ -238,7 +241,7 @@ for company in companies:
                     try:
                         webdriver.switch_to.alert.accept()
                     except:
-                        ws['AZ'+str(index)] = "error"
+                        ws['AZ'+str(index)] = "added"
             
             except:
                 ws['AZ'+str(index)] = "error"
@@ -381,21 +384,23 @@ for company in companies:
                     temp = os.path.join(progdirname,'1234567890.pdf')
                     attachmentError = ''
                     i=-1
-                    attachmentFile = os.path.join(dirname,company+'\\'+values[13]+'t.pdf')
+                    attachmentFile = os.path.join(dirname,company+'\\'+values[9]+'t.pdf')
                     if(not(os.path.exists(attachmentFile))):
                         attachmentFile = temp
                         attachmentError = attachmentError + ' t'
                     webdriver.find_element_by_name('ctl00$ContentPlaceHolder1$FACT_FIELD_44868').clear()
                     webdriver.find_element_by_name('ctl00$ContentPlaceHolder1$FACT_FIELD_44868').send_keys(attachmentFile)# مدرک تحصیلی
 
-                    attachmentFile = os.path.join(dirname,company+'\\'+values[13]+'s.pdf')
+                    attachmentFile = os.path.join(dirname,company+'\\'+values[9]+'s.pdf')
                     if(not(os.path.exists(attachmentFile))):
-                        attachmentFile = temp
-                        attachmentError = attachmentError + ' s'
+                        attachmentFile = os.path.join(dirname,company+'\\'+values[9]+'.pdf')
+                        if(not(os.path.exists(attachmentFile))):
+                            attachmentFile = temp
+                            attachmentError = attachmentError + ' s'
                     webdriver.find_element_by_name('ctl00$ContentPlaceHolder1$FACT_FIELD_44869').clear()
                     webdriver.find_element_by_name('ctl00$ContentPlaceHolder1$FACT_FIELD_44869').send_keys(attachmentFile)# سابقه بیمه
 
-                    attachmentFile = os.path.join(dirname,company+'\\'+values[13]+'g.pdf')
+                    attachmentFile = os.path.join(dirname,company+'\\'+values[9]+'g.pdf')
                     if(not(os.path.exists(attachmentFile))):
                         attachmentFile = temp
                         attachmentError = attachmentError + ' g'
@@ -415,7 +420,7 @@ for company in companies:
                     try:
                         webdriver.switch_to.alert.accept()
                     except:
-                        ws['AJ'+str(index)] = "error"
+                        ws['AJ'+str(index)] = "added"
             
             except:
                 ws['AJ'+str(index)] = "error"
