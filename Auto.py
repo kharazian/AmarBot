@@ -5,6 +5,7 @@ from random import randint
 import pandas as pd
 from openpyxl import load_workbook
 import os
+import sys
 
 dirname = 'D:\\Report\\1398\\TabdilVaz'
 progdirname = os.path.dirname(__file__)
@@ -27,6 +28,10 @@ print(companies)
 # companies = ['SazMotori','SazMotori']
 forms =  userData.readline().rstrip().split(',')
 excelfile =  userData.readline().rstrip()
+if len(sys.argv) >= 2:
+    excelfile = sys.argv[1]
+if len(sys.argv) >= 3:
+    forms = sys.argv[2].split(',')
 print(forms)
 i = 0
 attachmentError = ''
@@ -221,15 +226,19 @@ for company in companies:
 
                     attachmentFile = os.path.join(dirname,company+'\\'+values[13]+'g.pdf')
                     if(not(os.path.exists(attachmentFile))):
-                        attachmentFile = temp
-                        attachmentError = attachmentError + ' g'
+                        attachmentFile = os.path.join(dirname,company+'\\'+values[13]+'j.pdf')
+                        if(not(os.path.exists(attachmentFile))):
+                            attachmentFile = temp
+                            attachmentError = attachmentError + ' g'
                     webdriver.find_element_by_name('ctl00$ContentPlaceHolder1$FACT_FIELD_44836').clear()
                     webdriver.find_element_by_name('ctl00$ContentPlaceHolder1$FACT_FIELD_44836').send_keys(attachmentFile)# قزازداد
 
                     attachmentFile = os.path.join(dirname,company+'\\'+values[13]+'m.pdf')
                     if(not(os.path.exists(attachmentFile))):
-                        attachmentFile = temp
-                        attachmentError = attachmentError + ' m'
+                        attachmentFile = os.path.join(dirname,company+'\\'+values[13]+' m.pdf')
+                        if(not(os.path.exists(attachmentFile))):                        
+                            attachmentFile = temp
+                            attachmentError = attachmentError + ' m'
                     webdriver.find_element_by_name('ctl00$ContentPlaceHolder1$FACT_FIELD_44837').clear()
                     webdriver.find_element_by_name('ctl00$ContentPlaceHolder1$FACT_FIELD_44837').send_keys(attachmentFile)# مجوز به کارگیری
 
@@ -251,23 +260,18 @@ for company in companies:
                         webdriver.switch_to.alert.accept()
                     except:
                         print('alert error')
-                    try:
-                         wb.save(os.path.join(dirname, company+excelfile))
-                    except:
-                        print('file open')
+
             except:
                 ws['AZ'+str(index)] = "error"
                 withError += 1
                 ws['BA'+str(index)] = col[i]
                 ws['BB'+str(index)] = values[i]
                 print('{0} Frm2 : {1} - {2} {3:3.0f}% Error {4} - {5} {6} {7} '.format(company,index,total,index/total*100,values[13], i,col[i], values[i]))                    
-                try:
-                    wb.save(os.path.join(dirname, company+excelfile))
-                except:
-                    print('file open')
-                continue
 
-        wb.save(os.path.join(dirname, company+excelfile))
+        try:
+            wb.save(os.path.join(dirname, company+excelfile))
+        except:
+            print('file open')
 
         print('Frm2 {} Added {} Person.'.format(company,added))
         print('Frm2 {} With {} Error.'.format(company,withError))
@@ -414,8 +418,10 @@ for company in companies:
 
                     attachmentFile = os.path.join(dirname,company+'\\'+values[9]+'g.pdf')
                     if(not(os.path.exists(attachmentFile))):
-                        attachmentFile = temp
-                        attachmentError = attachmentError + ' g'
+                        attachmentFile = os.path.join(dirname,company+'\\'+values[9]+'j.pdf')
+                        if(not(os.path.exists(attachmentFile))):
+                            attachmentFile = temp
+                            attachmentError = attachmentError + ' g'
                     webdriver.find_element_by_name('ctl00$ContentPlaceHolder1$FACT_FIELD_44870').clear()
                     webdriver.find_element_by_name('ctl00$ContentPlaceHolder1$FACT_FIELD_44870').send_keys(attachmentFile)# قزازداد        
 
@@ -437,24 +443,20 @@ for company in companies:
                         webdriver.switch_to.alert.accept()
                     except:
                         print('alert error')
-                    try:
-                         wb.save(os.path.join(dirname, company+excelfile))
-                    except:
-                        print('file open')
+
                    
             except:
                 ws['AJ'+str(index)] = "error"
                 withError += 1
                 ws['AK'+str(index)] = col[i]
                 ws['AL'+str(index)] = values[i]
-                print('{0} Frm3 : {1} - {2} {3:3.0f}%  Error {4} - {5} {6} {7}'.format(company,index,total,index/total*100,values[9], i,col[i], values[i]))                    
-                try:
-                    wb.save(os.path.join(dirname, company+excelfile))
-                except:
-                    print('file open')                
+                print('{0} Frm3 : {1} - {2} {3:3.0f}%  Error {4} - {5} {6} {7}'.format(company,index,total,index/total*100,values[9], i,col[i], values[i]))                                 
                 continue
 
-        wb.save(os.path.join(dirname, company+excelfile))
+        try:
+            wb.save(os.path.join(dirname, company+excelfile))
+        except:
+            print('file open') 
 
         print('Frm3 {} Added {} Person.'.format(company,added))
         print('Frm3 {} With {} Error.'.format(company,withError))
