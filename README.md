@@ -1,4 +1,4 @@
 # AmarBot
 
-# Install. npm i selenium-chromedriver
-# pip install selenium
+# Install. npm install chromedriver
+# 		or		pip install selenium
