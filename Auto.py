@@ -10,7 +10,7 @@ import sys
 dirname = 'D:\\Report\\1398\\TabdilVaz'
 progdirname = os.path.dirname(__file__)
        
-chromedriver_path = r'C://Users/a.akhavan\AppData/Roaming/npm/node_modules/chromedriver/lib/chromedriver/chromedriver.exe' # Change this to your own chromedriver path!
+chromedriver_path = r'D://chromedriver/lib/chromedriver/chromedriver.exe' # Change this to your own chromedriver path!
 webdriver = webdriver.Chrome(executable_path=chromedriver_path)
 
 webdriver.get('http://amarnameh.imo.org.ir')
@@ -45,6 +45,7 @@ for company in companies:
         withError = 0
         col = []
         values = []
+        delaytime = 3
 
         ws['AZ1'] = 'state'
         ws['BA1'] = 'error'
@@ -68,8 +69,20 @@ for company in companies:
                     else:
                         webdriver.get('http://amarnameh.imo.org.ir/Input/EditEx.aspx?Id=8023')
 
-                    webdriver.find_element_by_name('ctl00_ContentPlaceHolder1_dialog_233104304').click()         
-                    webdriver.find_element_by_id('ctl00_ContentPlaceHolder1_FACT_FIELD_44788t3').click()#isfahan
+                    webdriver.find_element_by_name('ctl00_ContentPlaceHolder1_dialog_233104304').click()    
+                    webdriver.find_element_by_name('ctl00$ContentPlaceHolder1$FACT_FIELD_44788$FACT_FIELD_44788_LKP_HRC_TABLE_82_cmb_0').click() 
+                    sleep(delaytime)
+                    webdriver.find_element_by_xpath('//*[@id="ctl00_ContentPlaceHolder1_FACT_FIELD_44788_FACT_FIELD_44788_LKP_HRC_TABLE_82_cmb_0_DropDown"]/div/ul/li[10]').click()
+                    sleep(delaytime)
+                    webdriver.find_element_by_name('ctl00$ContentPlaceHolder1$FACT_FIELD_44788$FACT_FIELD_44788_LKP_HRC_TABLE_82_cmb_1').click() 
+                    sleep(delaytime)
+                    webdriver.find_element_by_xpath('//*[@id="ctl00_ContentPlaceHolder1_FACT_FIELD_44788_FACT_FIELD_44788_LKP_HRC_TABLE_82_cmb_1_DropDown"]/div/ul/li[26]').click()
+                    sleep(delaytime)
+                    webdriver.find_element_by_name('ctl00$ContentPlaceHolder1$FACT_FIELD_44788$FACT_FIELD_44788_LKP_HRC_TABLE_82_cmb_2').click() 
+                    sleep(delaytime)
+                    webdriver.find_element_by_xpath('//*[@id="ctl00_ContentPlaceHolder1_FACT_FIELD_44788_FACT_FIELD_44788_LKP_HRC_TABLE_82_cmb_2_DropDown"]/div/ul/li[4]').click()#isfahan
+
+                    webdriver.find_element_by_xpath('//*[@id="ctl00_ContentPlaceHolder1_dialog_233104304"]/div/div[2]/button[1]').click() 
                     i = 6
                     webdriver.find_element_by_xpath('//*[@id="ctl00_ContentPlaceHolder1_FACT_FIELD_44789"]/option['+values[i]+']').click()# وضعیت استخدامی
                     i = 7
@@ -305,8 +318,20 @@ for company in companies:
                     else:
                         webdriver.get('http://amarnameh.imo.org.ir/Input/EditEx.aspx?Id=8024')
 
-                    webdriver.find_element_by_name('ctl00_ContentPlaceHolder1_dialog_954246153').click()         
-                    webdriver.find_element_by_id('ctl00_ContentPlaceHolder1_FACT_FIELD_44838t3').click()#isfahan
+                    webdriver.find_element_by_name('ctl00_ContentPlaceHolder1_dialog_954246153').click()    
+                    webdriver.find_element_by_name('ctl00$ContentPlaceHolder1$FACT_FIELD_44838$FACT_FIELD_44838_LKP_HRC_TABLE_82_cmb_0').click()
+                    sleep(delaytime)      
+                    webdriver.find_element_by_xpath('//*[@id="ctl00_ContentPlaceHolder1_FACT_FIELD_44838_FACT_FIELD_44838_LKP_HRC_TABLE_82_cmb_0_DropDown"]/div/ul/li[10]').click()
+                    sleep(delaytime)
+                    webdriver.find_element_by_name('ctl00$ContentPlaceHolder1$FACT_FIELD_44838$FACT_FIELD_44838_LKP_HRC_TABLE_82_cmb_1').click()      
+                    sleep(delaytime)
+                    webdriver.find_element_by_xpath('//*[@id="ctl00_ContentPlaceHolder1_FACT_FIELD_44838_FACT_FIELD_44838_LKP_HRC_TABLE_82_cmb_1_DropDown"]/div/ul/li[26]').click()
+                    sleep(delaytime)
+                    webdriver.find_element_by_name('ctl00$ContentPlaceHolder1$FACT_FIELD_44838$FACT_FIELD_44838_LKP_HRC_TABLE_82_cmb_2').click()      
+                    sleep(delaytime)
+                    webdriver.find_element_by_xpath('//*[@id="ctl00_ContentPlaceHolder1_FACT_FIELD_44838_FACT_FIELD_44838_LKP_HRC_TABLE_82_cmb_2_DropDown"]/div/ul/li[4]').click()#isfahan
+                    
+                    webdriver.find_element_by_xpath('//*[@id="ctl00_ContentPlaceHolder1_dialog_954246153"]/div/div[2]/button[1]').click() 
                     i = 6
                     webdriver.find_element_by_name('ctl00$ContentPlaceHolder1$FACT_FIELD_44839').clear()
                     webdriver.find_element_by_name('ctl00$ContentPlaceHolder1$FACT_FIELD_44839').send_keys(values[i])#نام
